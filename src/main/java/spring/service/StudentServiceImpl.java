@@ -17,15 +17,15 @@ public class StudentServiceImpl implements StudentService {
 	private StudentDAO studentDAO;
 	
 	@Override
+	@Transactional
 	public long save(Student student) {
-		// TODO Auto-generated method stub
-		return 0;
+		return studentDAO.save(student);
 	}
 
 	@Override
+	@Transactional
 	public Student get(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return studentDAO.get(id);
 	}
 
 	@Override
@@ -35,15 +35,15 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
+	@Transactional
 	public void update(long id, Student student) {
-		// TODO Auto-generated method stub
-		
+		studentDAO.update(id, student);
 	}
 
 	@Override
+	@Transactional
 	public void delete(long id) {
-		// TODO Auto-generated method stub
-		
+		studentDAO.delete(id);
 	}
 
 }

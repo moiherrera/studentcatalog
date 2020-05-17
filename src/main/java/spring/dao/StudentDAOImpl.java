@@ -2,6 +2,7 @@ package spring.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,8 +23,7 @@ public class StudentDAOImpl implements StudentDAO{
 
 	@Override
 	public Student get(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().get(Student.class, id);
 	}
 
 	@Override
@@ -34,14 +34,19 @@ public class StudentDAOImpl implements StudentDAO{
 
 	@Override
 	public void update(long id, Student student) {
-		// TODO Auto-generated method stub
-		
+		Session session = sessionFactory.getCurrentSession();
+		Student pastStudent = session.byId(Student.class).load(id);
+		pastStudent.setFirstName(student.getFirstName());
+		pastStudent.setLastName(student.getLastName());
+		pastStudent.setSsn(student.getSsn());
+		session.flush();
 	}
 
 	@Override
 	public void delete(long id) {
-		// TODO Auto-generated method stub
-		
+		Session session = sessionFactory.getCurrentSession();
+		Student student = session.byId(Student.class).load(id);
+		session.delete(student);
 	}
 
 }
